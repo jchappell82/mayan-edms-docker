@@ -1,15 +1,21 @@
 import os
 
+ALLOWED_HOSTS = ['*']
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('POSTGRES_DB'),
         'USER': os.environ.get('POSTGRES_USER'),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': os.environ.get('POSTGRES_PORT_5432_TCP_ADDR'),
-        'PORT': os.environ.get('POSTGRES_PORT_5432_TCP_PORT'),
+        'HOST': 'postgres',
+        'PORT': '5432',
     }
 }
 
-BROKER_URL = 'redis://{}:{}/0'.format(os.environ.get('REDIS_PORT_6379_TCP_ADDR'),  os.environ.get('REDIS_PORT_6379_TCP_PORT'))
-CELERY_RESULT_BACKEND = 'redis://{}:{}/0'.format(os.environ.get('REDIS_PORT_6379_TCP_ADDR'),  os.environ.get('REDIS_PORT_6379_TCP_PORT'))
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+BROKER_URL = 'amqp://{}:{}@rabbitmq:5672/{}'.format(
+    os.environ.get('RABBITMQ_DEFAULT_USER'),
+    os.environ.get('RABBITMQ_DEFAULT_PASS'),
+    os.environ.get('RABBITMQ_DEFAULT_VHOST'),
+)
