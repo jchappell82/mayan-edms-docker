@@ -21,17 +21,21 @@ Execute Docker's build command::
 
     docker build -t mayanedms/mayanedms .
 
+Build the image using an apt cacher::
+
+    docker build -t mayanedms/mayanedms --build-arg APT_PROXY=172.18.0.1 .
+
 
 Deploying
 ---------
 
-Initialize the Mayan EDMS container using::
+Initialize the container using::
 
-    docker run --rm -v mayan_media:/usr/local/lib/python2.7/dist-packages/mayan/media -v mayan_settings:/usr/local/lib/python2.7/dist-packages/mayan/settings mayanedms/mayanedms mayan:init
+    docker run --rm -v mayan_media:/var/lib/mayan -v mayan_settings:/etc/mayan mayanedms/mayanedms mayan:init
 
-Launch the container using::
+Launch the container::
 
-    docker run -d --name mayan-edms --restart=always -p 80:80 -v mayan_media:/usr/local/lib/python2.7/dist-packages/mayan/media -v mayan_settings:/usr/local/lib/python2.7/dist-packages/mayan/settings mayanedms/mayanedms
+    docker run -d --name mayan-edms --restart=always -p 80:80 -v mayan_media:/var/lib/mayan -v mayan_settings:/etc/mayan mayanedms/mayanedms
 
 The frontend will be available by browsing to http://127.0.0.1
 
@@ -39,6 +43,20 @@ All files will be stored in the following two volumes::
 
  - mayan_media
  - mayan_settings
+
+If another web server is running on port 80 use a different port in the
+`-p` option, ie: `-p 81:80`.
+
+Stopping and starting
+---------------------
+To stop the container use::
+
+    docker stop mayan-edms
+
+To start the container again::
+
+    docker start mayan-edms
+
 
 Configuring
 -----------

@@ -4,8 +4,9 @@ MAINTAINER Roberto Rosario "roberto.rosario@mayan-edms.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 
+ARG APT_PROXY
 # Package caching
-RUN echo 'Acquire::http { Proxy "http://172.18.0.1:3142"; };' > /etc/apt/apt.conf.d/01proxy
+RUN if [ "${APT_PROXY}" ]; then echo "Acquire::http { Proxy \"http://${APT_PROXY}:3142\"; };" > /etc/apt/apt.conf.d/01proxy; fi
 
 # Install base Ubuntu libraries
 RUN apt-get update && \
@@ -77,9 +78,12 @@ RUN mkdir -p $MAYAN_INSTALL_DIR/media/document_storage/
 # Fix ownership
 RUN chown -R www-data:www-data $MAYAN_INSTALL_DIR
 
-# Persistent Mayan EDMS files
-VOLUME $MAYAN_INSTALL_DIR/media
-VOLUME $MAYAN_INSTALL_DIR/settings
+# Make volume symlinks
+RUN ln -s $MAYAN_INSTALL_DIR/media /var/lib/mayan
+RUN ln -s $MAYAN_INSTALL_DIR/settings /etc/mayan
+RUN chown www-data:www-data /var/lib/mayan
+RUN chown www-data:www-data /etc/mayan
+VOLUME ["/etc/mayan", "/var/lib/mayan"]
 
 COPY entrypoint.sh /entrypoint.sh
 
