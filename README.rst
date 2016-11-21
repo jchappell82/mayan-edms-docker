@@ -45,7 +45,7 @@ All files will be stored in the following two volumes::
  - mayan_settings
 
 If another web server is running on port 80 use a different port in the
-`-p` option, ie: `-p 81:80`.
+``-p`` option, ie: ``-p 81:80``.
 
 Stopping and starting
 ---------------------
@@ -61,7 +61,7 @@ To start the container again::
 Configuring
 -----------
 
-To edit the settings file, check the physical location of the `mayan_settings` volume using::
+To edit the settings file, check the physical location of the ``mayan_settings`` volume using::
 
     docker volume inspect mayan_settings
 
@@ -77,8 +77,8 @@ Which should produce an output similar to this one::
         }
     ]
 
-In this case the physical location of the `mayan_settings` volume is
-`/var/lib/docker/volumes/mayan_settings/_data`. Edit the settings with your
+In this case the physical location of the ``mayan_settings`` volume is
+``/var/lib/docker/volumes/mayan_settings/_data``. Edit the settings with your
 favorite editor::
 
     sudo vi /var/lib/docker/volumes/mayan_settings/_data/local.py
@@ -87,7 +87,7 @@ favorite editor::
 Backups
 -------
 
-To backup the existing data, check the physical location of the `mayan_media` volume using::
+To backup the existing data, check the physical location of the ``mayan_media`` volume using::
 
     docker volume inspect mayan_media
 
@@ -103,7 +103,7 @@ Which should produce an output similar to this one::
         }
     ]
 
-Only the `db.sqlite3` file and the `document_storage` folders need to be backedup::
+Only the ``db.sqlite3`` file and the ``document_storage`` folders need to be backed up::
 
     sudo tar -zcvf backup.tar.gz /var/lib/docker/volumes/mayan_media/_data/document_storage /var/lib/docker/volumes/mayan_media/_data/db.sqlite3
     sudo chown `whoami` backup.tar.gz
