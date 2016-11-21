@@ -8,25 +8,6 @@ Docker file to create an image for Mayan EDMS
 Instructions
 ------------
 
-Building the image
-------------------
-
-Clone the repository with::
-
-    git clone https://gitlab.com/mayan-edms/mayan-edms-docker.git
-
-Change to the directory of the cloned repository::
-
-    cd mayan-edms-docker
-
-Execute Docker's build command::
-
-    docker build -t mayanedms/mayanedms .
-
-Build the image using an apt cacher::
-
-    docker build -t mayanedms/mayanedms --build-arg APT_PROXY=172.18.0.1 .
-
 
 Deploying
 ---------
@@ -117,5 +98,27 @@ Uncompress the archive in the original docker volume using::
 
     sudo tar -xvzf backup.tar.gz -C /
 
+
+Building the image
+------------------
+
+Clone the repository with::
+
+    git clone https://gitlab.com/mayan-edms/mayan-edms-docker.git
+
+Change to the directory of the cloned repository::
+
+    cd mayan-edms-docker
+
+Execute Docker's build command::
+
+    docker build -t mayanedms/mayanedms .
+
+Build the image using an apt cacher::
+
+    docker build -t mayanedms/mayanedms --build-arg APT_PROXY=172.18.0.1 .
+
+
 .. |Docker badge| image:: https://img.shields.io/docker/pulls/mayanedms/mayanedms.svg
    :target: https://hub.docker.com/r/mayanedms/mayanedms/
+
