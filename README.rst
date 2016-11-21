@@ -1,3 +1,5 @@
+|Docker badge|
+
 Description
 -----------
 
@@ -114,3 +116,6 @@ Restore
 Uncompress the archive in the original docker volume using::
 
     sudo tar -xvzf backup.tar.gz -C /
+
+.. |Docker badge| image:: https://img.shields.io/docker/pulls/mayanedms/mayanedms.svg
+   :target: https://hub.docker.com/r/mayanedms/mayanedms/
