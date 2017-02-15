@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-MAINTAINER Roberto Rosario "roberto.rosario@mayan-edms.com"
+MAINTAINER Jon Chappell "jon@itsdangerous.net"
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -44,7 +44,7 @@ rm -f /var/cache/apt/archives/*.deb
 ENV MAYAN_INSTALL_DIR=/usr/local/lib/python2.7/dist-packages/mayan
 
 # Install Mayan EDMS, latest production release
-RUN pip install mayan-edms==2.1.5
+RUN pip install mayan-edms==2.1.10
 
 # Install Python clients for PostgreSQL, REDIS, librabbitmq and uWSGI
 RUN pip install redis uwsgi
