@@ -18,11 +18,13 @@ apt-get install -y --no-install-recommends \
         libjpeg-dev \
         libmagic1 \
         libpng-dev \
+        libpq-dev \
         libreoffice \
         libtiff-dev \
         nginx \
         netcat-openbsd \
         poppler-utils \
+        postgresql-client \
         python-dev \
         python-pip \
         python-setuptools \
@@ -47,7 +49,7 @@ ENV MAYAN_INSTALL_DIR=/usr/local/lib/python2.7/dist-packages/mayan
 RUN pip install mayan-edms==2.1.10
 
 # Install Python clients for PostgreSQL, REDIS, librabbitmq and uWSGI
-RUN pip install redis uwsgi
+RUN pip install redis uwsgi psycopg2
 
 # Collect static files
 RUN mayan-edms.py collectstatic --noinput
